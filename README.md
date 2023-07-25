@@ -1,2 +1,2 @@
 # Web Novels Scraper
-A php project built to scrape web novels from specific web applications into pdf or epub
+A laravel project built to crawl web novels from specific web applications into pdf or epub
