@@ -36,6 +36,7 @@ class NovelSource extends Model
 
 	const WUXIA_WORLD = 1;
 	const NOVEL_USB = 2;
+	const KITCHEN_NOVEL = 3;
 
     /**
      * @return array
@@ -47,15 +48,24 @@ class NovelSource extends Model
                 'id' => self::WUXIA_WORLD,
                 'title' => 'Wuxia World',
                 'base_url' => 'https://readnovel.eu',
-                'novel_listing_url' => 'https://wuxiaworld.eu/api/novel-filter/?itemsPerPage=12&page=1&novelStatus=CD&exclude_tags=beautiful-female-lead,female-protagonist,tomboyish-female-lead,rpe&exclude_category=yaoi,romance,gender-bender,smut,adult,shounen-ai,shoujo-ai&order=-rating',
-                'slug' => 'wuxiaworld'
+                'novel_listing_url' => 'https://wuxiaworld.eu/api/novel-filter/?itemsPerPage=12&page=1&novelStatus=CD
+                        &exclude_tags=beautiful-female-lead,female-protagonist,tomboyish-female-lead,rpe
+                        &exclude_category=yaoi,romance,gender-bender,smut,adult,shounen-ai,shoujo-ai&order=-rating',
+                'slug' => 'wuxia-world'
             ],
             [
                 'id' => self::NOVEL_USB,
                 'title' => 'Novel USB',
                 'base_url' => 'https://novelusb.com',
                 'novel_listing_url' => 'https://novelusb.com/sort/completed',
-                'slug' => 'novelusb'
+                'slug' => 'novel-usb'
+            ],
+            [
+                'id' => self::KITCHEN_NOVEL,
+                'title' => 'Kitchen Novel',
+                'base_url' => 'https://www.kitchennovel.com/',
+                'novel_listing_url' => null,
+                'slug' => 'kitchen-novel'
             ]
 
         ])->map(function($item){

@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 /**
  * Created by Reliese Model.
@@ -8,7 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use App\Enums\NovelStatusEnum;
+use Eloquent;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Collection;
 
 /**
  * Class Novel
@@ -26,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $updated_at
  *
  * @package App\Models
+ * @mixin Eloquent
  */
 class Novel extends Model
 {
@@ -46,4 +51,47 @@ class Novel extends Model
 		'description',
 		'cover_image_url'
 	];
+
+	/**
+	* Get the route key for the model.
+	*/
+   public function getRouteKeyName(): string
+   {
+	   return 'slug';
+   }
+
+    /**
+     * @return Tag[]|Collection
+     */
+    public function tags()
+    {
+		return Tag::join(NovelTag::class, function(JoinClause $joinClause){
+			return $joinClause->on('novel_tags.tag_id', '=', 'tags.id')
+				->where('novel_tags.novel_id', $this->id);
+		})->select(['tags.*'])->get();
+
+	}
+
+    /**
+     * @return Tag[]|Collection
+     */
+    public function categories()
+    {
+		return Genre::join(NovelGenre::class, function(JoinClause $joinClause){
+			return $joinClause->on('novel_categories.category_id', '=', 'categories.id')
+				->where('novel_categories.novel_id', $this->id);
+		})->select(['categories.*'])->get();
+
+	}
+
+	public function chapters()
+	{
+		return $this->hasMany(NovelChapter::class);
+
+	}
+
+	public function novel_source()
+	{
+		return $this->belongsTo(NovelSource::class);
+	}
 }

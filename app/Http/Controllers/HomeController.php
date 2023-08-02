@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\WebCrawler;
+use App\Models\Novel;
 use Illuminate\Http\Request;
+
+use function Termwind\render;
 
 class HomeController extends Controller
 {
@@ -24,5 +28,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function crawl(Novel $novel)
+    {
+        return (new WebCrawler($novel))
+            ->getNovelDetails();
     }
 }

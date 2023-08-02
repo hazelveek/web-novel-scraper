@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('novel_sources', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->index();
-            $table->string('base_url');
-            $table->text('novel_listing_url')->nullable();
+        Schema::create('tags', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('slug')->unique();
+            $table->string('display_name');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('novel_sources');
+        Schema::dropIfExists('tags');
     }
 };

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title')->index();
             $table->string('slug')->unique();
             $table->string('author')->index();
-            $table->string('novel_url');
+            $table->text('novel_url');
             $table->string('completion_status')->default('ongoing')->index();
             $table->text('description');
             $table->string('cover_image_url');
